@@ -1,5 +1,15 @@
-import { NavLink } from "react-router-dom";
-import "./Navigation.css";
+import { NavLink as BaseNavLink } from "react-router-dom";
+import styled from "styled-components";
+
+const NavLink = styled(BaseNavLink)`
+  color: blue;
+  &.active {
+    color: red;
+  }
+  & + & {
+    margin-left: 20px;
+  }
+`;
 
 const Navigation = () => {
   return (
