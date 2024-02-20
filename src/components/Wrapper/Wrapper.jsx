@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import { WrapHolder } from "./styledWrapper";
+import { WrapHolder } from "./Wrapper.styled";
 
 const Wrapper = ({children}) => {
     return (
@@ -10,7 +10,10 @@ const Wrapper = ({children}) => {
 }
 
 Wrapper.propTypes = {
-    children: PropTypes.element
+    children: PropTypes.oneOfType([
+        PropTypes.arrayOf(PropTypes.node),
+        PropTypes.node
+    ]).isRequired
 }
 
 export default Wrapper;
