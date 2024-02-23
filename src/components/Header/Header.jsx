@@ -1,5 +1,5 @@
-import Navigation from "../Navigation/Navigation";
-import Wrapper from "../Wrapper/Wrapper";
+import Navigation from "../navigation/Navigation";
+import Wrapper from "../wrapper/Wrapper";
 import { HeaderHolder } from "./Header.styled";
 
 const Header = () => {

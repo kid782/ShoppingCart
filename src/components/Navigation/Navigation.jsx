@@ -1,5 +1,5 @@
 import { NavLink, NavHolder, NavLogo, Nav } from "./Navigation.styled";
-import Cart from "../Cart/Cart";
+import Cart from "../cart/Cart";
 
 const Navigation = () => {
 	return (

@@ -1,7 +1,7 @@
-import Header from "../components/Header/Header";
+import Header from "../components/header/Header";
 import { Button } from "../style/shared/buttons";
-import Wrapper from "../components/Wrapper/Wrapper";
-import Footer from "../components/Footer/Footer";
+import Footer from "../components/footer/Footer";
+import Wrapper from "../components/wrapper/Wrapper";
 
 const ShoppingPage = () => {
 	return (

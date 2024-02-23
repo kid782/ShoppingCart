@@ -1,7 +1,7 @@
-import Header from "../components/Header/Header";
-import Wrapper from "../components/Wrapper/Wrapper";
+import Header from "../components/header/Header";
+import Wrapper from "../components/wrapper/Wrapper";
 import { Button } from "../style/shared/buttons";
-import Footer from "../components/Footer/Footer";
+import Footer from "../components/footer/Footer";
 
 const Homepage = () => {
 	return (
