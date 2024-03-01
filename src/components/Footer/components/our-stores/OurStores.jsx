@@ -1,6 +1,6 @@
 import { stores } from "./data";
-import { FooterHeading, FooterItem } from "../../Footer.styled";
-import { OurStoresHolder, AddressItem } from "./OurStores.styled";
+import { FooterHeading, FooterItem, FooterText } from "../../Footer.styled";
+import { OurStoresHolder } from "./OurStores.styled";
 
 const OurStores = () => {
 	return (
@@ -9,11 +9,11 @@ const OurStores = () => {
 			{stores.length &&
 			<div>
 				{stores.map(store => (
-					<address key={store.id}>
-						<AddressItem>{store.street}</AddressItem>
-						<AddressItem>{`${store.city}, ${store.zipCode}`}</AddressItem>
-						<AddressItem $bold>{store.phoneNumber}</AddressItem>
-					</address>
+					<FooterItem as="address" key={store.id}>
+						<FooterText as="span">{store.street}</FooterText>
+						<FooterText as="span">{`${store.city}, ${store.zipCode}`}</FooterText>
+						<FooterText as="span" $bold>{store.phoneNumber}</FooterText>
+					</FooterItem>
 				))}
 			</div>}
 		</OurStoresHolder>

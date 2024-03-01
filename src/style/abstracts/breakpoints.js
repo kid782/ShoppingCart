@@ -1,20 +1,27 @@
-const breakpoints = {
+const breakpointsUp = {
     sm: "768px",
     md: "992px",
     lg: "1280px",
     xl: "1440px"
 }
 
+const breakpointsDown = {
+	sm: "767px",
+    md: "991px",
+    lg: "1279px",
+    xl: "1439px"
+}
+
 export const mediaDown = {
-    sm: `(max-width: ${breakpoints.sm})`,
-    md: `(max-width: ${breakpoints.md})`,
-    lg: `(max-width: ${breakpoints.lg})`,
-    xl: `(max-width: ${breakpoints.xl})`
+    sm: `(max-width: ${breakpointsDown.sm})`,
+    md: `(max-width: ${breakpointsDown.md})`,
+    lg: `(max-width: ${breakpointsDown.lg})`,
+    xl: `(max-width: ${breakpointsDown.xl})`
 }
 
 export const mediaUp = {
-    sm: `(min-width: ${breakpoints.sm})`,
-    md: `(min-width: ${breakpoints.md})`,
-    lg: `(min-width: ${breakpoints.lg})`,
-    xl: `(min-width: ${breakpoints.xl})`
+    sm: `(min-width: ${breakpointsUp.sm})`,
+    md: `(min-width: ${breakpointsUp.md})`,
+    lg: `(min-width: ${breakpointsUp.lg})`,
+    xl: `(min-width: ${breakpointsUp.xl})`
 }
