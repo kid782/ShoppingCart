@@ -1,20 +1,15 @@
-import Header from "../components/header/Header";
-import Wrapper from "../components/wrapper/Wrapper";
-import { Button } from "../style/shared/buttons";
-import Footer from "../components/footer/Footer";
+import Hero from "../components/hero/Hero";
+import ProductsSlider from "../components/products-slider/ProductsSlider";
+import { useLoaderData } from "react-router-dom";
 
 const Homepage = () => {
+	const { productsOnSale, popularProducts } = useLoaderData();
 	return (
-    <>
-		<Header />
-		<main>
-			<Wrapper>
-				<div>This is the Homepage</div>
-				<Button>Click here</Button>
-			</Wrapper>
-		</main>
-		<Footer />
-    </>
+		<>
+			<Hero />
+			<ProductsSlider title="Products on a special sale!" products={productsOnSale} />
+			<ProductsSlider title="Most popular" products={popularProducts} />
+		</>
 	);
 };
 

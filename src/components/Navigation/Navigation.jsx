@@ -1,17 +1,31 @@
 import { NavLink, NavHolder, NavLogo, Nav, MobileNavButton, NavAndCartHolder } from "./Navigation.styled";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faX } from "@fortawesome/free-solid-svg-icons";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useScrollContext } from "../../contexts/ScrollContext";
+import { useLocation } from "react-router-dom";
 import Cart from "../cart/Cart";
 
 const Navigation = () => {
 	const [navActive, setNavActive] = useState(false);
 	const { scrollActive, setScrollActive } = useScrollContext();
+	const location = useLocation();
+
 	const toggleNav = () => {
 		setNavActive(!navActive);
 		setScrollActive(!scrollActive);
 	}
+
+	useEffect(() => {
+		setScrollActive(true);
+		setNavActive(false);
+
+		return () => {
+			setScrollActive(false);
+			setNavActive(true)
+		}
+	}, [location])
+
 	return (
 		<NavHolder>
 			<NavLogo>BLJ SHOP</NavLogo>

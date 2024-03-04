@@ -51,6 +51,7 @@ export const FooterItem = styled.div`
 `
 
 export const FooterLink = styled(NavLink)`
+	display: block;
 	color: ${colors.gray};
 	margin-bottom: 15px;
 	text-decoration: none;

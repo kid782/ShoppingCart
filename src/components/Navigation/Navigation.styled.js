@@ -1,6 +1,6 @@
 import { NavLink as BaseNavLink } from "react-router-dom";
 import styled from "styled-components";
-import { colors } from "../../style/abstracts/variables";
+import { colors, transitions } from "../../style/abstracts/variables";
 import { textLargeCSSProps } from "../../style/typography/typography";
 import { mediaUp, mediaDown } from "../../style/abstracts/breakpoints";
 
@@ -41,6 +41,7 @@ export const NavLogo = styled.div`
 	color: ${colors.gray};
 	font-size: 32px;
 	font-weight: bold;
+	font-family: sans-serif;
 `
 
 export const MobileNavButton = styled.button`
@@ -53,8 +54,11 @@ export const NavAndCartHolder = styled.div`
 	display: flex;
 	width: 55%;
 	justify-content: space-between;
+	transition: opacity ${transitions.default}, visibility ${transitions.default};
 	@media ${mediaDown.sm} {
-		display: ${props => props.$active ? 'block' : 'none'};
+		display: block;
+		opacity: ${props => props.$active ? '1' : '0'};
+		visibility: ${props => props.$active ? 'visible' : 'hidden'};
 		position: fixed;
 		top: 96px;
 		left: 0;
@@ -62,5 +66,6 @@ export const NavAndCartHolder = styled.div`
 		height: 100%;
 		background: ${colors.white};
 		border-top: 1px solid ${colors.gray};
+		z-index: 10;
 	}
 `

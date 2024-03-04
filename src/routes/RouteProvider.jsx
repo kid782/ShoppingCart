@@ -1,19 +1,28 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Homepage from "../pages/Homepage.jsx";
+import App from "../app.jsx";
 import ShoppingPage from "../pages/ShoppingPage.jsx";
+import Homepage from "../pages/Homepage.jsx";
 import PageNotFound from "../pages/PageNotFound.jsx";
 import ScrollProvider from "../contexts/ScrollContext.jsx";
 import { GlobalCSS } from "../style/GlobalCSS.jsx";
+import { getHomepageData } from "../api/products.js";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Homepage />,
+    element: <App />,
     errorElement: <PageNotFound />,
-  },
-  {
-    path: "/shopping-page",
-    element: <ShoppingPage />,
+	children: [
+		{
+			index: true,
+			element: <Homepage />,
+			loader: getHomepageData
+		},
+		{
+			path: "/shopping-page",
+			element: <ShoppingPage />,
+		},
+	]
   },
 ]);
 
@@ -27,3 +36,4 @@ const RouteProvider = () => {
 };
 
 export default RouteProvider;
+
