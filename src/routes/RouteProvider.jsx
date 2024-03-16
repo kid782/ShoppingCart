@@ -3,7 +3,6 @@ import App from "../app.jsx";
 import ShoppingPage from "../pages/ShoppingPage.jsx";
 import Homepage from "../pages/Homepage.jsx";
 import PageNotFound from "../pages/PageNotFound.jsx";
-import ScrollProvider from "../contexts/ScrollContext.jsx";
 import { GlobalCSS } from "../style/GlobalCSS.jsx";
 import { getHomepageData } from "../api/products.js";
 
@@ -28,10 +27,10 @@ const router = createBrowserRouter([
 
 const RouteProvider = () => {
   return (
-    <ScrollProvider>
+	<>
 		<GlobalCSS />
 		<RouterProvider router={router} />
-	</ScrollProvider>
+	</>
   )
 };
 

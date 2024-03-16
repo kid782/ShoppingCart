@@ -2,13 +2,13 @@ import { NavLink, NavHolder, NavLogo, Nav, MobileNavButton, NavAndCartHolder } f
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faX } from "@fortawesome/free-solid-svg-icons";
 import { useState, useEffect } from "react";
-import { useScrollContext } from "../../contexts/ScrollContext";
 import { useLocation } from "react-router-dom";
+import { useSrollLock } from "../../hooks/hooks";
 import Cart from "../cart/Cart";
 
 const Navigation = () => {
 	const [navActive, setNavActive] = useState(false);
-	const { scrollActive, setScrollActive } = useScrollContext();
+	const [scrollActive, setScrollActive] = useSrollLock();
 	const location = useLocation();
 
 	const toggleNav = () => {
