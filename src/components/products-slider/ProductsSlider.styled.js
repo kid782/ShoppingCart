@@ -26,7 +26,7 @@ export const ProductsTitle = styled(H2)`
 `
 
 export const ProductsHolder = styled.div`
-	margin-bottom: 50px;
+	margin-bottom: 100px;
 	@media ${mediaDown.sm} {
 		margin-bottom; 50px;
 	}

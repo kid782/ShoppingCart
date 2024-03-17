@@ -24,7 +24,7 @@ const Navigation = () => {
 			setScrollActive(false);
 			setNavActive(true)
 		}
-	}, [location])
+	}, [location, setScrollActive])
 
 	return (
 		<NavHolder>

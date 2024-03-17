@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { colors } from "../../style/abstracts/variables";
-import { mediaUp, mediaDown } from "../../style/abstracts/breakpoints";
 
 export const HeaderHolder = styled.header`
 	background-color: ${colors.blue};

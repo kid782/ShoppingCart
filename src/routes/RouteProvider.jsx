@@ -1,10 +1,10 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import App from "../app.jsx";
-import ShoppingPage from "../pages/ShoppingPage.jsx";
-import Homepage from "../pages/Homepage.jsx";
-import PageNotFound from "../pages/PageNotFound.jsx";
+import ShoppingPage from "../pages/shopping-page/ShoppingPage.jsx";
+import Homepage from "../pages/homepage/Homepage.jsx";
+import PageNotFound from "../pages/page-not-found/PageNotFound.jsx";
 import { GlobalCSS } from "../style/GlobalCSS.jsx";
-import { getHomepageData } from "../api/products.js";
+import { getHomepageData, getShoppingPageData } from "../api/products.js";
 
 const router = createBrowserRouter([
   {
@@ -20,6 +20,7 @@ const router = createBrowserRouter([
 		{
 			path: "/shopping-page",
 			element: <ShoppingPage />,
+			loader: getShoppingPageData
 		},
 	]
   },

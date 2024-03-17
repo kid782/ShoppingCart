@@ -18,3 +18,8 @@ export async function getHomepageData() {
 	const popularProducts = getFiveRandom(dummyProducts);
 	return { productsOnSale, popularProducts }
 }
+
+export async function getShoppingPageData() {
+	const dummyProducts = await getAllProducts();
+	return { products: dummyProducts }
+}

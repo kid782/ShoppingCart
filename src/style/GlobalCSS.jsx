@@ -17,6 +17,10 @@ export const GlobalStyles = createGlobalStyle`
 	main {
 		overflow: hidden;
 	}
+	img {
+		display: block;
+		width: 100%;
+	}
 	.svg-inline--fa {
 		height: 25px;
 		width: 25px;

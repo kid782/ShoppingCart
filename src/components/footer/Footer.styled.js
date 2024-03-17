@@ -1,7 +1,7 @@
 import { styled } from "styled-components";
 import { colors, transitions } from "../../style/abstracts/variables";
 import { H3 } from "../../style/typography/typography";
-import { mediaDown, mediaUp } from "../../style/abstracts/breakpoints";
+import { mediaUp } from "../../style/abstracts/breakpoints";
 import { NavLink } from "react-router-dom";
 
 export const FooterHolder = styled.footer`

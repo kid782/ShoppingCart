@@ -1,5 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { describe, it, expect } from "vitest";
 import Header from "./Header";
 
 const mockRoute = createBrowserRouter([
