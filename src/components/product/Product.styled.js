@@ -25,6 +25,11 @@ export const ProductTitle = styled(Link)`
 	display: block;
 	${textMediumCSSProps};
 	margin-bottom: 10px;
+	color: ${colors.black};
+	text-decoration: none;
+	&:hover {
+		text-decoration: underline;
+	}
 `
 
 export const ProductCategory = styled.span`

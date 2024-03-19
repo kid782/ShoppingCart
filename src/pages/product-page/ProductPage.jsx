@@ -1,10 +1,15 @@
 import { useLoaderData } from "react-router-dom";
+import Wrapper from "../../components/wrapper/Wrapper";
 
 const ProductPage = () => {
 	const { productName } = useLoaderData();
 	return (
 		<div>
-			Product page { productName }
+			<Wrapper>
+				<p>
+					Product page <span style={{fontWeight: "bold"}}>{productName}</span>
+				</p>
+			</Wrapper>
 		</div>
 	);
 };
