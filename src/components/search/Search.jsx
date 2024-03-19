@@ -1,6 +1,8 @@
-const Search = () => {
+import { Input } from "./Search.styled";
+
+const Search = ({searchValue, handleSearch}) => {
     return (
-        <input type="search" placeholder="Search for a product" />
+        <Input value={searchValue} onChange={handleSearch} type="search" placeholder="Search for a product" />
     )
 }
 

@@ -6,13 +6,13 @@ import Product, { productShape } from "../product/Product";
 const Products = ({products}) => {
      return (
         <ProductsHolder>
-            <Wrapper>
-                <ProductsItems>
-                    {products.map(product => (
-                        <Product key={product.id} product={product} />
-                    ))}
-                </ProductsItems>
-            </Wrapper>
+			<ProductsItems>
+				{products.length > 0 ? products.map(product => (
+					<Product key={product.id} product={product} />
+				)) :
+					<div>No search results</div>
+				}
+			</ProductsItems>
         </ProductsHolder>
      )
 }

@@ -1,11 +1,15 @@
 import PropTypes from "prop-types";
-import { ProductsCard } from "./Product.styled";
+import { ProductsCard, ProductImage, ProductTitle, ProductCategory } from "./Product.styled";
 
 const Product = ({product}) => {
+	const urlName = product.title.replace(/\s+/g, '-').toLowerCase();
+	const url = `/product/${urlName}`
     return (
         <ProductsCard>
-            <img src={product.image} />
-            <div>{product.title}</div>
+            <ProductImage src={product.image} />
+            <ProductTitle to={url}>{product.title}</ProductTitle>
+			<div>Price: ${product.price}</div>
+			<ProductCategory>{product.category}</ProductCategory>
         </ProductsCard>
     )
 }
