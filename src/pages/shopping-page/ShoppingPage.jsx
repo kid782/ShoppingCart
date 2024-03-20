@@ -6,7 +6,8 @@ import Products from "../../components/products/Products";
 import Filter from "../../components/filter/Filter";
 import Wrapper from "../../components/wrapper/Wrapper";
 import Search from "../../components/search/Search";
-import { ProdAndFilterHolder } from "./ShoppingPage.styled";
+import AccordionPanel from "../../components/accordion/AccordionPanel";
+import { ProdAndFilterHolder, FiltersTitle, FiltersHolder } from "./ShoppingPage.styled";
 
 const ShoppingPage = () => {
 	const productsData = useLoaderData();
@@ -22,7 +23,7 @@ const ShoppingPage = () => {
 			{ name: category, id: uuidv4()}
 		))
 		return categoriesWithIds;
-	}, [])
+	}, [allProducts])
 
 	const handleSearch = (e) => {
 		setSearchQuery(e.target.value);
@@ -37,22 +38,29 @@ const ShoppingPage = () => {
 		setProducts(searchResults)
 	}
 	return (
-    	<>
+	<>
 		<Wrapper>
 			<ProdAndFilterHolder>
 				<Search searchValue={searchQuery} handleSearch={handleSearch} />
-				<Filter
-					categories={categories}
-					products={allProducts}
-					setProducts={setProducts}
-					activeCategoryId ={activeCategoryId}
-					setActiveCategoryId = {setActiveCategoryId}
-					setSearchQuery={setSearchQuery}
-				/>
+				<FiltersHolder>
+					<FiltersTitle>Filters</FiltersTitle>
+					<AccordionPanel title="By category" spacing={10} expandedByDefault={true}>
+						<Filter
+							categories={categories}
+							setProducts={setProducts}
+							activeCategoryId ={activeCategoryId}
+							setActiveCategoryId = {setActiveCategoryId}
+							setSearchQuery={setSearchQuery}
+						/>
+					</AccordionPanel>
+					<AccordionPanel title="By price">
+						<input type="range" />
+					</AccordionPanel>
+				</FiltersHolder>
 				<Products products={products} />
 			</ProdAndFilterHolder>
 		</Wrapper>
-    	</>
+	</>
 	);
 };
 
