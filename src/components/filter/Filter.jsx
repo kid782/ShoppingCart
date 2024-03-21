@@ -2,56 +2,77 @@ import PropTypes from "prop-types";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
-import { FilterHolder, FilterButton, ClearFilterButton } from "./Filter.styled";
-import { getProductsByCategory, getAllProducts } from "../../api/products";
+import { useEffect } from "react";
 
-const Filter = ({categories, setProducts, activeCategoryId, setActiveCategoryId, setSearchQuery}) => {
+import { getProductsByCategory, getAllProducts } from "../../api/products";
+import { FilterHolder, FilterButton, ClearFilterButton, FiltersTitle } from "./Filter.styled";
+import AccordionPanel from "../../components/accordion/AccordionPanel";
+
+const Filter = ({queryParams, setQueryParams, categories, setProducts, activeCategory, setActiveCategory, setSearchQuery}) => {
+
+	const categoryParam = queryParams?.get("category");
+
     const handleFilter = (category) => {
 		setSearchQuery("");
-		setActiveCategoryId(category.id);
-		getProductsByCategory(category.name).then((res) => {
+		setQueryParams(queryParams => {
+			queryParams.set("category", category);
+			queryParams.set("search", "");
+			return queryParams;
+		});
+		setActiveCategory(category);
+		getProductsByCategory(category).then((res) => {
 			setProducts(res);
 		})
     }
 
     const handleFilterReset = () => {
 		setSearchQuery("");
-		setActiveCategoryId(0);
+		setActiveCategory("");
 		getAllProducts().then((res) => {
 			setProducts(res);
 		})
+		setQueryParams("");
     }
 
+	useEffect(() => {
+		if (categoryParam) setActiveCategory(categoryParam);
+	}, [categoryParam, setActiveCategory])
+
     return (
-      <FilterHolder>
-			{categories.map(item => {
+		<FilterHolder>
+			<FiltersTitle>Filters</FiltersTitle>
+			<AccordionPanel title="By category" spacing={10} expandedByDefault={true}>
+					{categories.map(item => {
 				const formattedCategory = (
-				item.name.charAt(0).toUpperCase() +
-				item.name.slice(1)
+				item.charAt(0).toUpperCase() +
+				item.slice(1)
 			)
 			return (
+			// eslint-disable-next-line react/jsx-key
 			<FilterButton
-				$active = {activeCategoryId === item.id ? true : false}
-				key={item.id}
+				$active = {activeCategory === item? true : false}
 				onClick={() => handleFilter(item)}>
 				{formattedCategory}
 				<FontAwesomeIcon icon={faChevronLeft} />
 			</FilterButton>)
 			})}
+			</AccordionPanel>
+			<AccordionPanel title="By price">
+				<input type="range" />
+			</AccordionPanel>
 			<ClearFilterButton onClick={handleFilterReset}>Clear filters</ClearFilterButton>
-      </FilterHolder>
+		</FilterHolder>
     )
 }
 
 Filter.propTypes = {
-	categories: PropTypes.arrayOf(PropTypes.shape({
-		id: PropTypes.string,
-		name: PropTypes.string
-	})),
+	categories: PropTypes.arrayOf(PropTypes.string),
 	setProducts: PropTypes.func.isRequired,
-	activeCategoryId: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
-	setActiveCategoryId: PropTypes.func.isRequired,
+	activeCategory: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
+	setActiveCategory: PropTypes.func.isRequired,
 	setSearchQuery: PropTypes.func.isRequired,
+	queryParams: PropTypes.object,
+	setQueryParams: PropTypes.func.isRequired
 };
 
 export default Filter;

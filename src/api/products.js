@@ -1,6 +1,7 @@
 import { getData, getFiveRandom } from "../helpers/helpers";
 
 const BASE_URL = "https://fakestoreapi.com/products/";
+const ALL_CATEGORIES_URL = `${BASE_URL}/categories`;
 const CATEGORY_BASE_URL = `${BASE_URL}/category/`;
 
 export async function getProductsByCategory(category) {
@@ -19,7 +20,17 @@ export async function getHomepageData() {
 	return { productsOnSale, popularProducts }
 }
 
-export async function getShoppingPageData() {
-	const dummyProducts = await getAllProducts();
-	return { products: dummyProducts }
+export async function getShoppingPageData({request}) {
+	const categoryParams = new URL(request.url).searchParams.get('category');
+	const categories = await getAllCategories();
+	if (categoryParams) {
+		const productsByCategory = await getProductsByCategory(categoryParams);
+		return { categories, products: productsByCategory }
+	} else {
+		return { categories, products: await getAllProducts()}
+	}
+}
+
+export async function getAllCategories() {
+	return getData(ALL_CATEGORIES_URL);
 }
