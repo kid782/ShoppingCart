@@ -1,21 +1,17 @@
 import styled from "styled-components";
 import { mediaDown } from "../../style/abstracts/breakpoints";
 import { transitions, colors } from "../../style/abstracts/variables";
-import { textMediumCSSProps } from "../../style/typography/typography";
-
-export const FilterHolder = styled.div`
-	@media ${mediaDown.sm} {
-		margin-bottom: 20px;
-	}
-`
+import { textMediumCSSProps, H3 } from "../../style/typography/typography";
 
 export const FilterButton = styled.button`
     display: flex;
 	align-items: center;
 	gap: 5px;
-    margin-bottom: 20px;
     text-align: left;
 	${textMediumCSSProps};
+	&:not(:last-child) {
+		margin-bottom: 20px;
+	}
 	& svg {
 		color: ${colors.black};
 		opacity: 0;
@@ -26,5 +22,21 @@ export const FilterButton = styled.button`
 	}
 `
 export const ClearFilterButton = styled.button`
-${textMediumCSSProps};
+	margin-top: 20px;
+	font-weight: bold;
+	${textMediumCSSProps};
+`
+
+export const FiltersTitle = styled(H3)`
+	font-weight: 600;
+    margin-bottom: 20px;
+	padding-bottom: 5px;
+	border-bottom: 1px solid black;
+`
+
+export const FilterHolder = styled.div`
+	max-width: 50%;
+	@media ${mediaDown.sm} {
+		margin-bottom: 20px;
+	}
 `
