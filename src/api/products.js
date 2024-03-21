@@ -21,11 +21,21 @@ export async function getHomepageData() {
 }
 
 export async function getShoppingPageData({request}) {
-	const categoryParams = new URL(request.url).searchParams.get('category');
+	const queryParams = new URL(request.url).searchParams;
+	const categoryParams = queryParams?.get("category");
+	const searchParams = queryParams?.get("search");
 	const categories = await getAllCategories();
-	if (categoryParams) {
-		const productsByCategory = await getProductsByCategory(categoryParams);
-		return { categories, products: productsByCategory }
+	if (categoryParams || searchParams) {
+		if (categoryParams) {
+			const productsByCategory = await getProductsByCategory(categoryParams);
+			return { categories, products: productsByCategory }
+		}
+		if (searchParams) {
+			const products = await getAllProducts().filter(item =>
+				item.title.toLowerCase().includes(searchParams)
+			);
+			return {categories, products: products}
+		}
 	} else {
 		return { categories, products: await getAllProducts()}
 	}
