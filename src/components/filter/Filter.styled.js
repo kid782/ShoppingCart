@@ -7,6 +7,7 @@ export const FilterButton = styled.button`
     display: flex;
 	align-items: center;
 	gap: 5px;
+	width: 100%;
     text-align: left;
 	${textMediumCSSProps};
 	&:not(:last-child) {
@@ -35,7 +36,7 @@ export const FiltersTitle = styled(H3)`
 `
 
 export const FilterHolder = styled.div`
-	max-width: 50%;
+	max-width: 70%;
 	@media ${mediaDown.sm} {
 		margin-bottom: 20px;
 	}

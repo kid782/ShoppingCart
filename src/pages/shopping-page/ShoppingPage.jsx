@@ -9,17 +9,16 @@ import { ProdAndFilterHolder } from "./ShoppingPage.styled";
 
 const ShoppingPage = () => {
 	const { products: allProducts, categories }  = useLoaderData();
-
 	const [queryParams, setQueryParams] = useSearchParams();
 	const [products, setProducts] = useState(allProducts);
 	const [searchQuery, setSearchQuery] = useState("");
-	const [activeCategory, setActiveCategory] = useState("");
 
 	return (
 	<>
 		<Wrapper>
 			<ProdAndFilterHolder>
 				<Search
+				queryParams={queryParams}
 				setQueryParams={setQueryParams}
 				searchValue={searchQuery}
 				allProducts={allProducts}
@@ -27,12 +26,11 @@ const ShoppingPage = () => {
 				setSearchQuery={setSearchQuery}
 				/>
 				<Filter
+				initLoadProducts={allProducts}
 				queryParams={queryParams}
 				setQueryParams={setQueryParams}
 				categories={categories}
 				setProducts={setProducts}
-				activeCategory ={activeCategory}
-				setActiveCategory = {setActiveCategory}
 				setSearchQuery={setSearchQuery}
 				/>
 				<Products products={products} />

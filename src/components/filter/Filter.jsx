@@ -1,3 +1,4 @@
+import { useState } from "react";
 import PropTypes from "prop-types";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -7,16 +8,18 @@ import { useEffect } from "react";
 import { getProductsByCategory, getAllProducts } from "../../api/products";
 import { FilterHolder, FilterButton, ClearFilterButton, FiltersTitle } from "./Filter.styled";
 import AccordionPanel from "../../components/accordion/AccordionPanel";
+import { productShape } from "../../components/product/Product";
+import RangeFilter from "./components/range-filter/RangeFilter";
 
-const Filter = ({queryParams, setQueryParams, categories, setProducts, activeCategory, setActiveCategory, setSearchQuery}) => {
-
+const Filter = ({initLoadProducts, queryParams, setQueryParams, categories, setProducts, setSearchQuery}) => {
+	const [activeCategory, setActiveCategory] = useState("");
 	const categoryParam = queryParams?.get("category");
 
-    const handleFilter = (category) => {
+    const handleCategoryFilter = (category) => {
 		setSearchQuery("");
 		setQueryParams(queryParams => {
 			queryParams.set("category", category);
-			queryParams.set("search", "");
+			queryParams.get("search") && queryParams.set("search", "");
 			return queryParams;
 		});
 		setActiveCategory(category);
@@ -51,14 +54,14 @@ const Filter = ({queryParams, setQueryParams, categories, setProducts, activeCat
 			// eslint-disable-next-line react/jsx-key
 			<FilterButton
 				$active = {activeCategory === item? true : false}
-				onClick={() => handleFilter(item)}>
+				onClick={() => handleCategoryFilter(item)}>
 				{formattedCategory}
 				<FontAwesomeIcon icon={faChevronLeft} />
 			</FilterButton>)
 			})}
 			</AccordionPanel>
 			<AccordionPanel title="By price">
-				<input type="range" />
+				<RangeFilter initLoadProducts={initLoadProducts} />
 			</AccordionPanel>
 			<ClearFilterButton onClick={handleFilterReset}>Clear filters</ClearFilterButton>
 		</FilterHolder>
@@ -66,10 +69,9 @@ const Filter = ({queryParams, setQueryParams, categories, setProducts, activeCat
 }
 
 Filter.propTypes = {
+	initLoadProducts: PropTypes.arrayOf(productShape),
 	categories: PropTypes.arrayOf(PropTypes.string),
 	setProducts: PropTypes.func.isRequired,
-	activeCategory: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
-	setActiveCategory: PropTypes.func.isRequired,
 	setSearchQuery: PropTypes.func.isRequired,
 	queryParams: PropTypes.object,
 	setQueryParams: PropTypes.func.isRequired

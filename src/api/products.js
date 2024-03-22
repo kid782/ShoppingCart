@@ -22,19 +22,12 @@ export async function getHomepageData() {
 
 export async function getShoppingPageData({request}) {
 	const queryParams = new URL(request.url).searchParams;
-	const categoryParams = queryParams?.get("category");
-	const searchParams = queryParams?.get("search");
+	const categoryParams = queryParams.get("category");
 	const categories = await getAllCategories();
-	if (categoryParams || searchParams) {
-		if (categoryParams) {
-			const productsByCategory = await getProductsByCategory(categoryParams);
-			return { categories, products: productsByCategory }
-		}
-		if (searchParams) {
-			const products = await getAllProducts().filter(item =>
-				item.title.toLowerCase().includes(searchParams)
-			);
-			return {categories, products: products}
+	if (categoryParams) {
+		const productsByCategory = await getProductsByCategory(categoryParams);
+		return {
+			categories, products: productsByCategory
 		}
 	} else {
 		return { categories, products: await getAllProducts()}

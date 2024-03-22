@@ -11,6 +11,8 @@ export const AccordionHolder = styled.div`
 export const AccordionButton = styled.button`
     display: block;
     padding: 10px 0;
+	width: 100%;
+	text-align: left;
 `
 export const AccordionContent = styled.div`
     transition: height ${transitions.default};

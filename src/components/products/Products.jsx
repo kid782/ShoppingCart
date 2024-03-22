@@ -1,4 +1,3 @@
-import Wrapper from "../wrapper/Wrapper";
 import PropTypes from "prop-types";
 import { ProductsHolder, ProductsItems } from "./Products.styled";
 import Product, { productShape } from "../product/Product";

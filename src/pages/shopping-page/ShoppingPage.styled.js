@@ -7,5 +7,6 @@ export const ProdAndFilterHolder = styled.div`
         display: grid;
         grid-template-columns: 1fr 2fr;
         grid-template-rows: 1fr auto;
+		margin-bottom: 100px;
     }
 `
