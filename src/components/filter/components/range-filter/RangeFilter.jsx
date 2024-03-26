@@ -16,8 +16,9 @@ const RangeFilter = ({queryParams, setQueryParams, minAndMax, rangeValue, setRan
 		});
 		rangeRef.current.min = newMin;
 		setQueryParams((queryParams) => {
-			queryParams.set("range", `${rangeRef.current.min}-${rangeRef.current.max}`);
-			return queryParams;
+			const newQueryParams = queryParams;
+			newQueryParams.set("range", `${rangeRef.current.min}-${rangeRef.current.max}`);
+			return newQueryParams;
 		})
 	}
 
@@ -31,8 +32,9 @@ const RangeFilter = ({queryParams, setQueryParams, minAndMax, rangeValue, setRan
 		});
 		rangeRef.current.max = newMax;
 		setQueryParams((queryParams) => {
-			queryParams.set("range", `${rangeRef.current.min}-${rangeRef.current.max}`);
-			return queryParams;
+			const newQueryParams = queryParams;
+			newQueryParams.set("range", `${rangeRef.current.min}-${rangeRef.current.max}`);
+			return newQueryParams;
 		})
 	}
 
