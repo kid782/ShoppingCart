@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useLoaderData, useSearchParams } from "react-router-dom";
 
 import Products from "../../components/products/Products";
@@ -12,6 +12,10 @@ const ShoppingPage = () => {
 	const [queryParams, setQueryParams] = useSearchParams();
 	const [products, setProducts] = useState(allProducts);
 	const [searchQuery, setSearchQuery] = useState("");
+
+	useEffect(() => {
+		setProducts(allProducts);
+	}, [queryParams, allProducts])
 
 	return (
 	<>

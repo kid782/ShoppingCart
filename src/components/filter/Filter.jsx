@@ -5,14 +5,15 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
 import { useEffect } from "react";
 
-import { getProductsByCategory, getAllProducts } from "../../api/products";
 import { FilterHolder, FilterButton, ClearFilterButton, FiltersTitle } from "./Filter.styled";
 import AccordionPanel from "../../components/accordion/AccordionPanel";
 import { productShape } from "../../components/product/Product";
 import RangeFilter from "./components/range-filter/RangeFilter";
 
-const Filter = ({initLoadProducts, queryParams, setQueryParams, categories, setProducts, setSearchQuery}) => {
+const Filter = ({setProducts, initLoadProducts, queryParams, setQueryParams, categories, setSearchQuery}) => {
+	const minAndMax = { min: 7, max: 1000};
 	const [activeCategory, setActiveCategory] = useState("");
+	const [rangeValue, setRangeValue] = useState({min: minAndMax.min, max: minAndMax.max});
 	const categoryParam = queryParams?.get("category");
 
     const handleCategoryFilter = (category) => {
@@ -23,17 +24,12 @@ const Filter = ({initLoadProducts, queryParams, setQueryParams, categories, setP
 			return queryParams;
 		});
 		setActiveCategory(category);
-		getProductsByCategory(category).then((res) => {
-			setProducts(res);
-		})
+		setRangeValue({ min: minAndMax.min, max: minAndMax.max })
     }
 
     const handleFilterReset = () => {
 		setSearchQuery("");
 		setActiveCategory("");
-		getAllProducts().then((res) => {
-			setProducts(res);
-		})
 		setQueryParams("");
     }
 
@@ -61,7 +57,15 @@ const Filter = ({initLoadProducts, queryParams, setQueryParams, categories, setP
 			})}
 			</AccordionPanel>
 			<AccordionPanel title="By price">
-				<RangeFilter initLoadProducts={initLoadProducts} />
+				<RangeFilter
+				initLoadProducts={initLoadProducts}
+				queryParams={queryParams}
+				setQueryParams={setQueryParams}
+				minAndMax={minAndMax}
+				rangeValue={rangeValue}
+				setRangeValue={setRangeValue}
+				setProducts={setProducts}
+				/>
 			</AccordionPanel>
 			<ClearFilterButton onClick={handleFilterReset}>Clear filters</ClearFilterButton>
 		</FilterHolder>

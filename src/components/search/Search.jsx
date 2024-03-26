@@ -20,11 +20,7 @@ const Search = ({queryParams, setQueryParams, searchValue, setSearchQuery, allPr
 
 	useEffect(() => {
 		if (searchParams) {
-			const searchResults = allProducts.filter(item =>
-				item.title.toLowerCase().includes(searchParams)
-			);
 			setSearchQuery(searchParams);
-			setProducts(searchResults);
 		}
 	}, [])
 

@@ -21,17 +21,29 @@ export async function getHomepageData() {
 }
 
 export async function getShoppingPageData({request}) {
-	const queryParams = new URL(request.url).searchParams;
-	const categoryParams = queryParams.get("category");
+	const queryParams = new URL(request.url).searchParams.entries();
 	const categories = await getAllCategories();
-	if (categoryParams) {
-		const productsByCategory = await getProductsByCategory(categoryParams);
-		return {
-			categories, products: productsByCategory
+	let products = await getAllProducts();
+
+	for (const [param, value] of queryParams) {
+		if (param === 'category') {
+			products = await getProductsByCategory(value);
 		}
-	} else {
-		return { categories, products: await getAllProducts()}
+		if (param === 'search') {
+			products = products.filter(item =>
+				item.title.toLowerCase().includes(value)
+			);
+		}
+		if (param === 'range') {
+			const [min, max] = value.split('-');
+			products = products.filter(product => {
+				const currentPrice = +product.price;
+				return currentPrice <= +max && currentPrice >= +min
+			})
+		}
 	}
+
+	return { categories, products }
 }
 
 export async function getAllCategories() {
